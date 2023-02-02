@@ -15,7 +15,7 @@ public abstract class BaseTest {
     protected final String URL = "https://vue-demo.daniel-avellaneda.com/";
     protected WebDriver driver;
     protected WebDriverWait driverWait;
-    private HomePage homePage;
+    protected HomePage homePage;
 
     @BeforeClass
     public void beforeClass() {
@@ -29,7 +29,7 @@ public abstract class BaseTest {
     @BeforeMethod
     public void beforeMethod() {
         driver.get(URL);
-        homePage.loginOption();
+
     }
     //@AfterClass
     //public void afterClass() {

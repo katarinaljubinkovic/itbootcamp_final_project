@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
@@ -20,12 +21,19 @@ public class LoginTests extends BaseTest{
         loginPage = new LoginPage(driver, driverWait);
         faker = new Faker();
     }
-    @Test
-    public void LoginPageTest() {
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
+
+    @BeforeMethod
+    @Override
+    public void beforeMethod() {
+        super.beforeMethod();
+        homePage.loginOption();
     }
     @Test
-    public void InputTypesTest() {
+    public void LoginPageTest() {
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
+    }
+    @Test
+    public void InputTypeTest() {
         Assert.assertEquals(loginPage.emailAttribute(), "email");
         Assert.assertEquals(loginPage.passwordAttribute(), "password");
     }
@@ -61,6 +69,5 @@ public class LoginTests extends BaseTest{
 
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
-
     }
 }
