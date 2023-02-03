@@ -15,6 +15,12 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//*[@id=\"app\"]/div[4]/div/div/div[1]")
     private WebElement popUpWindow;
 
+    @FindBy(className = "btnAdmin")
+    private WebElement admin;
+
+    @FindBy(className = "btnAdminCities")
+    private WebElement cities;
+
     public HomePage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
@@ -26,5 +32,12 @@ public class HomePage extends BasePage{
     }
     public String getPopUpMessage() {
         return popUpWindow.getText();
+    }
+    public WebElement getAdmin() {
+        return admin;
+    }
+
+    public WebElement getCities() {
+        return cities;
     }
 }
