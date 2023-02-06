@@ -13,7 +13,7 @@ public class HomePage extends BasePage{
     private WebElement signUpField;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[4]/div/div/div[1]")
-    private WebElement popUpWindow;
+    private WebElement verifyMessage;
 
     @FindBy(className = "btnAdmin")
     private WebElement admin;
@@ -42,6 +42,9 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]")
     private WebElement titleFR;
 
+    @FindBy(className = "btnProfile")
+    private WebElement myProfile;
+
     public HomePage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
@@ -51,31 +54,24 @@ public class HomePage extends BasePage{
     public void signUpOption() {
         signUpField.click();
     }
-    public String getPopUpMessage() {
-        return popUpWindow.getText();
+    public String getVerifyMessage() {
+        return verifyMessage.getText();
     }
-    public WebElement getAdmin() {
-        return admin;
+    public void adminCities() {
+        admin.click();
+        cities.click();
     }
-
-    public WebElement getCities() {
-        return cities;
+    public void chooseLanguage(Language language) {
+        languageButton.click();
+        switch (language) {
+            case EN:
+                localeEN.click(); break;
+            case ES:
+                localeES.click(); break;
+            case FR:
+                localeFR.click(); break;
+        }
     }
-
-    public WebElement getLanguageButton() {
-        return languageButton;
-    }
-    public WebElement getLocaleES() {
-        return localeES;
-    }
-    public WebElement getLocaleEN() {
-        return localeEN;
-    }
-
-    public WebElement getLocaleFR() {
-        return localeFR;
-    }
-
     public String getTitleES() {
         return titleES.getText();
     }
@@ -84,6 +80,9 @@ public class HomePage extends BasePage{
     }
     public String getTitleFR() {
         return titleFR.getText();
+    }
+    public WebElement getMyProfile() {
+        return myProfile;
     }
 
 }

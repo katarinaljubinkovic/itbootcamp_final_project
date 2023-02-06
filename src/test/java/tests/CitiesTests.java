@@ -23,8 +23,8 @@ public class CitiesTests extends BaseTest{
         loginPage = new LoginPage(driver, driverWait);
         citiesPage = new CitiesPage(driver, driverWait);
         faker = new Faker();
-        cityName = "London";
-        editedCityName = "London edited";
+        cityName = faker.address().city();
+        editedCityName = "";
     }
     @BeforeMethod
     @Override
@@ -32,8 +32,7 @@ public class CitiesTests extends BaseTest{
         super.beforeMethod();
         homePage.loginOption();
         loginPage.login("admin@admin.com", "12345");
-        homePage.getAdmin().click();
-        homePage.getCities().click();
+        homePage.adminCities();
     }
 
     @Test(priority = 1)
@@ -41,7 +40,6 @@ public class CitiesTests extends BaseTest{
 
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/admin/cities"));
         Assert.assertTrue(citiesPage.getLogoutButton().isDisplayed());
-
         citiesPage.getLogoutButton().click();
     }
     @Test(priority = 2)
@@ -53,17 +51,21 @@ public class CitiesTests extends BaseTest{
     }
     @Test(priority = 3)
     public void editCityTest() {
-
-        citiesPage.search(cityName);
-
-        citiesPage.edit(editedCityName);
+        citiesPage.createCity(cityName);
+        citiesPage.edit(cityName);
 
         Assert.assertTrue(citiesPage.getMessage().contains("Saved successfully"));
         citiesPage.getLogoutButton().click();
     }
     @Test(priority = 4)
     public void searchCityTest() {
-
+        citiesPage.createCity(cityName);
+        citiesPage.edit(cityName);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         citiesPage.search(editedCityName);
 
         Assert.assertTrue(citiesPage.containsSearchString(editedCityName));
@@ -71,22 +73,19 @@ public class CitiesTests extends BaseTest{
     }
     @Test(priority = 5)
     public void deleteCityTest() {
-        //citiesPage.createCity(cityName);
-        //try {
-            //Thread.sleep(5000);
-        //} catch (InterruptedException e) {
-           // throw new RuntimeException(e);
-        //}
+        citiesPage.createCity(cityName);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+           throw new RuntimeException(e);
+        }
         citiesPage.search(cityName);
-        driverWait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr"), 1));
 
         Assert.assertTrue(citiesPage.containsSearchString(cityName));
 
         citiesPage.getDeleteButton().click();
         driverWait.until(ExpectedConditions.visibilityOf(citiesPage.getDeleteButton()));
-
         citiesPage.getMessageDeleteButton().click();
-
         driverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"), "Deleted successfully"));
 
         Assert.assertTrue(citiesPage.getPopUpWindow().contains("Deleted successfully"));

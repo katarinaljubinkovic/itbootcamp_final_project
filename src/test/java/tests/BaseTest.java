@@ -31,8 +31,8 @@ public abstract class BaseTest {
         driver.get(URL);
 
     }
-    //@AfterClass
-    //public void afterClass() {
-        //driver.quit();
-    //}
+    @AfterClass
+    public void afterClass() {
+        driver.quit();
+    }
 }

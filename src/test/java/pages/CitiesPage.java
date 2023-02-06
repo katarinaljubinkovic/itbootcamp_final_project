@@ -64,13 +64,12 @@ public class CitiesPage extends BasePage{
     public CitiesPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
-
     public WebElement getLogoutButton() {
         return logoutButton;
     }
-    public void createCity(String editedCity) {
+    public void createCity(String city) {
         newItem.click();
-        this.name.sendKeys(editedCity);
+        this.name.sendKeys(city);
         saveButton.click();
     }
     public String getSaveMessage(){
@@ -83,15 +82,12 @@ public class CitiesPage extends BasePage{
     }
     public void edit(String cityName) {
         editButton.click();
-        editNameField.sendKeys(Keys.CONTROL + "a");
-        editNameField.sendKeys(Keys.DELETE);
-        editNameField.sendKeys(cityName + " - edited");
+        editNameField.sendKeys( " - edited");
         save.click();
     }
     public String getMessage() {
         return message.getText();
     }
-
     public boolean containsSearchString(String searchString) {
         for (WebElement city : cityList) {
             WebElement cityLink = city.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr/td[2]"));
@@ -101,7 +97,6 @@ public class CitiesPage extends BasePage{
         }
         return true;
     }
-
     public WebElement getDeleteButton() {
         return deleteButton;
     }

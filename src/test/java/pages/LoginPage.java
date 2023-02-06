@@ -16,10 +16,7 @@ public class LoginPage extends BasePage{
     private WebElement loginButton;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li")
-    private WebElement messageWrongDates;
-
-    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li")
-    private WebElement messageWrongPassword;
+    private WebElement alertMessage;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]")
     private WebElement logoutButton;
@@ -40,11 +37,8 @@ public class LoginPage extends BasePage{
         this.password.sendKeys(password);
         loginButton.click();
     }
-    public String getWrongDatesMessage() {
-        return messageWrongDates.getText();
-    }
-    public String getWrongPasswordMessage() {
-        return messageWrongPassword.getText();
+    public String getMessage() {
+        return alertMessage.getText();
     }
     public WebElement getLogoutButton() {
         return logoutButton;

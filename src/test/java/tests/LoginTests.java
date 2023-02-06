@@ -29,7 +29,7 @@ public class LoginTests extends BaseTest{
         homePage.loginOption();
     }
     @Test
-    public void LoginPageTest() {
+    public void VisitLoginPageTest() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
     @Test
@@ -41,15 +41,15 @@ public class LoginTests extends BaseTest{
     public void InvalidDatesLoginTest() {
         loginPage.login(faker.internet().emailAddress(), faker.internet().password());
 
-        Assert.assertEquals(loginPage.getWrongDatesMessage(), "User does not exists");
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login") );
+        Assert.assertEquals(loginPage.getMessage(), "User does not exists");
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/login") );
     }
     @Test
     public void InvalidPasswordLoginTest() {
         loginPage.login(EMAIL, faker.internet().password());
 
-        Assert.assertEquals(loginPage.getWrongPasswordMessage(), "Wrong password");
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
+        Assert.assertEquals(loginPage.getMessage(), "Wrong password");
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
     @Test
     public void ValidDatesLoginTest() {
@@ -57,7 +57,8 @@ public class LoginTests extends BaseTest{
 
         driverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[2]/div[1]/a"),
                         "Buy me a coffee"));
-        Assert.assertTrue(driver.getCurrentUrl().contains("/home"));
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/home"));
+        loginPage.logout();
     }
     @Test
     public void LogoutTest() {
@@ -65,7 +66,7 @@ public class LoginTests extends BaseTest{
         Assert.assertTrue(loginPage.getLogoutButton().isDisplayed());
 
         loginPage.logout();
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
 
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
