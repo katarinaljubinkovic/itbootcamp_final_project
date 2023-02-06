@@ -51,7 +51,7 @@ public class CitiesTests extends BaseTest{
     }
     @Test(priority = 3)
     public void editCityTest() {
-        citiesPage.createCity(cityName);
+        //citiesPage.createCity(cityName);
         citiesPage.edit(cityName);
 
         Assert.assertTrue(citiesPage.getMessage().contains("Saved successfully"));
@@ -59,13 +59,8 @@ public class CitiesTests extends BaseTest{
     }
     @Test(priority = 4)
     public void searchCityTest() {
-        citiesPage.createCity(cityName);
-        citiesPage.edit(cityName);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        //citiesPage.createCity(cityName);
+        //citiesPage.edit(cityName);
         citiesPage.search(editedCityName);
 
         Assert.assertTrue(citiesPage.containsSearchString(editedCityName));
@@ -73,12 +68,12 @@ public class CitiesTests extends BaseTest{
     }
     @Test(priority = 5)
     public void deleteCityTest() {
-        citiesPage.createCity(cityName);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-           throw new RuntimeException(e);
-        }
+        //citiesPage.createCity(cityName);
+        //try {
+            //Thread.sleep(5000);
+        //} catch (InterruptedException e) {
+           //throw new RuntimeException(e);
+        //}
         citiesPage.search(cityName);
 
         Assert.assertTrue(citiesPage.containsSearchString(cityName));
@@ -86,7 +81,8 @@ public class CitiesTests extends BaseTest{
         citiesPage.getDeleteButton().click();
         driverWait.until(ExpectedConditions.visibilityOf(citiesPage.getDeleteButton()));
         citiesPage.getMessageDeleteButton().click();
-        driverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"), "Deleted successfully"));
+        driverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"),
+                "Deleted successfully"));
 
         Assert.assertTrue(citiesPage.getPopUpWindow().contains("Deleted successfully"));
     }
