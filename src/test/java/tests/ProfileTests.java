@@ -12,7 +12,6 @@ import pages.SignUpPage;
 public class ProfileTests extends BaseTest {
     private SignUpPage signUpPage;
     private ProfilePage profilePage;
-    private Faker faker;
 
     @BeforeClass
     @Override
@@ -20,7 +19,6 @@ public class ProfileTests extends BaseTest {
         super.beforeClass();
         signUpPage = new SignUpPage(driver, driverWait);
         profilePage = new ProfilePage(driver, driverWait);
-        faker = new Faker();
 
     }
     @BeforeMethod

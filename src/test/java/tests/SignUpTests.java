@@ -11,13 +11,11 @@ import pages.SignUpPage;
 
 public class SignUpTests extends BaseTest{
     private SignUpPage signUpPage;
-    private Faker faker;
 
     @BeforeClass
     @Override
     public void beforeClass() {
         super.beforeClass();
-        faker = new Faker();
         signUpPage = new SignUpPage(driver, driverWait);
     }
     @BeforeMethod

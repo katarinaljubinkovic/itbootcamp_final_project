@@ -13,18 +13,13 @@ import pages.LoginPage;
 public class CitiesTests extends BaseTest{
     private LoginPage loginPage;
     private CitiesPage citiesPage;
-    private Faker faker;
-    private String cityName;
-    private String editedCityName;
+
     @BeforeClass
     @Override
     public void beforeClass() {
         super.beforeClass();
         loginPage = new LoginPage(driver, driverWait);
         citiesPage = new CitiesPage(driver, driverWait);
-        faker = new Faker();
-        cityName = faker.address().city();
-        editedCityName = "";
     }
     @BeforeMethod
     @Override
@@ -44,39 +39,47 @@ public class CitiesTests extends BaseTest{
     }
     @Test(priority = 2)
     public void createNewCity() {
-        citiesPage.createCity(cityName);
+        String city = faker.address().city();
+        citiesPage.createCity(city);
 
         Assert.assertTrue(citiesPage.getSaveMessage().contains("Saved successfully"));
         citiesPage.getLogoutButton().click();
     }
     @Test(priority = 3)
     public void editCityTest() {
-        //citiesPage.createCity(cityName);
-        citiesPage.edit(cityName);
+        String city = faker.address().city();
+        citiesPage.createCity(city);
+        citiesPage.edit(city);
 
         Assert.assertTrue(citiesPage.getMessage().contains("Saved successfully"));
         citiesPage.getLogoutButton().click();
     }
     @Test(priority = 4)
     public void searchCityTest() {
-        //citiesPage.createCity(cityName);
-        //citiesPage.edit(cityName);
-        citiesPage.search(editedCityName);
+        String city = faker.address().city();
+        String editedCity = city + " - edited";
+        citiesPage.createCity(city);
+        citiesPage.edit(city);
 
-        Assert.assertTrue(citiesPage.containsSearchString(editedCityName));
+        driverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"),
+                "Saved successfully"));
+        citiesPage.search(editedCity);
+
+        Assert.assertTrue(citiesPage.containsSearchString(editedCity));
         citiesPage.getLogoutButton().click();
     }
     @Test(priority = 5)
     public void deleteCityTest() {
-        //citiesPage.createCity(cityName);
-        //try {
-            //Thread.sleep(5000);
-        //} catch (InterruptedException e) {
-           //throw new RuntimeException(e);
-        //}
-        citiesPage.search(cityName);
+        String city = faker.address().city();
+        citiesPage.createCity(city);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+           throw new RuntimeException(e);
+        }
+        citiesPage.search(city);
 
-        Assert.assertTrue(citiesPage.containsSearchString(cityName));
+        Assert.assertTrue(citiesPage.containsSearchString(city));
 
         citiesPage.getDeleteButton().click();
         driverWait.until(ExpectedConditions.visibilityOf(citiesPage.getDeleteButton()));

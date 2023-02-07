@@ -75,14 +75,14 @@ public class CitiesPage extends BasePage{
     public String getSaveMessage(){
         return saveMessage.getText();
     }
-    public void search(String name) {
+    public void search(String city) {
         searchField.clear();
-        searchField.sendKeys(name);
+        searchField.sendKeys(city);
         searchButton.click();
     }
-    public void edit(String cityName) {
+    public void edit(String city) {
         editButton.click();
-        editNameField.sendKeys( " - edited");
+        editNameField.sendKeys(  " - edited");
         save.click();
     }
     public String getMessage() {

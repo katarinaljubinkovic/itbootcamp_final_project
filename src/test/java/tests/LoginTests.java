@@ -11,7 +11,6 @@ import pages.LoginPage;
 
 public class LoginTests extends BaseTest{
     private LoginPage loginPage;
-    private Faker faker;
     private final String EMAIL = "admin@admin.com";
     private final String PASSWORD = "12345";
 
@@ -19,7 +18,6 @@ public class LoginTests extends BaseTest{
     public void beforeClass() {
         super.beforeClass();
         loginPage = new LoginPage(driver, driverWait);
-        faker = new Faker();
     }
 
     @BeforeMethod
@@ -29,7 +27,7 @@ public class LoginTests extends BaseTest{
         homePage.loginOption();
     }
     @Test
-    public void VisitLoginPageTest() {
+    public void visitLoginPageTest() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
     @Test
@@ -38,21 +36,21 @@ public class LoginTests extends BaseTest{
         Assert.assertEquals(loginPage.passwordAttribute(), "password");
     }
     @Test
-    public void InvalidDatesLoginTest() {
+    public void invalidDatesLoginTest() {
         loginPage.login(faker.internet().emailAddress(), faker.internet().password());
 
         Assert.assertEquals(loginPage.getMessage(), "User does not exists");
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login") );
     }
     @Test
-    public void InvalidPasswordLoginTest() {
+    public void invalidPasswordLoginTest() {
         loginPage.login(EMAIL, faker.internet().password());
 
         Assert.assertEquals(loginPage.getMessage(), "Wrong password");
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
     @Test
-    public void ValidDatesLoginTest() {
+    public void validDatesLoginTest() {
         loginPage.login(EMAIL, PASSWORD);
 
         driverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[2]/div[1]/a"),
@@ -61,7 +59,7 @@ public class LoginTests extends BaseTest{
         loginPage.logout();
     }
     @Test
-    public void LogoutTest() {
+    public void logoutTest() {
         loginPage.login(EMAIL, PASSWORD);
         Assert.assertTrue(loginPage.getLogoutButton().isDisplayed());
 

@@ -36,32 +36,30 @@ public class ProfilePage extends BasePage {
         super(driver, driverWait);
     }
 
+    public void extracted(WebElement element) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        element.sendKeys(Keys.CONTROL + "a");
+        element.sendKeys(Keys.DELETE);
+    }
+
     public void editProfile(String name, String phone, String city, String country, String twitter, String gitHub) throws InterruptedException {
-        Thread.sleep(3000);
-        this.name.sendKeys(Keys.CONTROL + "a");
-        this.name.sendKeys(Keys.DELETE);
-        Thread.sleep(3000);
+        extracted(this.name);
         this.name.sendKeys(name);
-        this.phone.sendKeys(Keys.CONTROL + "a");
-        this.phone.sendKeys(Keys.DELETE);
-        Thread.sleep(3000);
+        extracted(this.phone);
         this.phone.sendKeys(phone);
-        this.city.sendKeys(Keys.SPACE);
-        this.city.sendKeys(Keys.CONTROL + "a");
+        extracted(this.city);
         this.city.sendKeys(city);
         this.city.sendKeys(Keys.ARROW_DOWN);
         this.city.sendKeys(Keys.ENTER);
-        this.country.sendKeys(Keys.CONTROL + "a");
-        this.country.sendKeys(Keys.DELETE);
-        Thread.sleep(3000);
+        extracted(this.country);
         this.country.sendKeys(country);
-        this.twitter.sendKeys(Keys.CONTROL + "a");
-        this.twitter.sendKeys(Keys.DELETE);
-        Thread.sleep(3000);
+        extracted(this.twitter);
         this.twitter.sendKeys(twitter);
-        this.gitHub.sendKeys(Keys.CONTROL + "a");
-        this.gitHub.sendKeys(Keys.DELETE);
-        Thread.sleep(3000);
+        extracted(this.gitHub);
         this.gitHub.sendKeys(gitHub);
         saveButton.click();
     }
