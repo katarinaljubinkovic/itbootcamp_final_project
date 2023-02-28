@@ -51,6 +51,9 @@ public class SignUpPage extends BasePage{
     public String getEmailExistsMessage() {
         return emailExistsMessage.getText();
     }
+    public String checkAttribute(WebElement webElement, String text) {
+        return webElement.getAttribute(text);
+    }
 
 
 }

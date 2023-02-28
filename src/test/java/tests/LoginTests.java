@@ -1,6 +1,5 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -31,7 +30,7 @@ public class LoginTests extends BaseTest{
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/login"));
     }
     @Test
-    public void InputTypeTest() {
+    public void inputTypeTest() {
         Assert.assertEquals(loginPage.emailAttribute(), "email");
         Assert.assertEquals(loginPage.passwordAttribute(), "password");
     }

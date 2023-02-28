@@ -1,6 +1,5 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -26,24 +25,24 @@ public class SignUpTests extends BaseTest{
     }
 
     @Test
-    public void SignUpPageTest() {
+    public void signUpPageTest() {
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/signup"));
     }
     @Test
-    public void InputTypeTest() {
+    public void inputTypeTest() {
         Assert.assertEquals(signUpPage.getEmailAttribute(), "email");
         Assert.assertEquals(signUpPage.getPasswordAttribute(), "password");
         Assert.assertEquals(signUpPage.getConfirmPasswordAttribute(), "password");
     }
     @Test
-    public void AlreadySignUpTest() {
+    public void alreadySignUpTest() {
         signUpPage.signUp("Test Test", "admin@admin.com", "123654", "123654");
 
         Assert.assertEquals(signUpPage.getEmailExistsMessage(), "E-mail already exists");
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/signup"));
     }
     @Test
-    public void ValidDatesSignUp() {
+    public void validDatesSignUp() {
         signUpPage.signUp("Katarina Ljubinkovic", faker.internet().emailAddress(), "12345", "12345");
 
         driverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"),
