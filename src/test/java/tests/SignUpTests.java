@@ -15,7 +15,7 @@ public class SignUpTests extends BaseTest{
     @Override
     public void beforeClass() {
         super.beforeClass();
-        signUpPage = new SignUpPage(driver, driverWait);
+        signUpPage = new SignUpPage(driver);
     }
     @BeforeMethod
     @Override
@@ -45,8 +45,6 @@ public class SignUpTests extends BaseTest{
     public void validDatesSignUp() {
         signUpPage.signUp("Katarina Ljubinkovic", faker.internet().emailAddress(), "12345", "12345");
 
-        driverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"),
-                "IMPORTANT: Verify your account"));
         Assert.assertTrue(homePage.getVerifyMessage().contains("IMPORTANT: Verify your account"));
     }
 }

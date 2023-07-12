@@ -6,15 +6,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public abstract class BasePage {
+
     protected WebDriver driver;
-    protected WebDriverWait driverWait;
+    protected WebDriverWait explicitWait;
 
 
 
-    public BasePage(WebDriver driver, WebDriverWait driverWait) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.driverWait = driverWait;
+        this.explicitWait = new WebDriverWait(driver, Duration.ofSeconds(15));
         PageFactory.initElements(this.driver, this);
 
     }

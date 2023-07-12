@@ -21,8 +21,8 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]")
     private WebElement logoutButton;
 
-    public LoginPage(WebDriver driver, WebDriverWait driverWait) {
-        super(driver, driverWait);
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
     public String emailAttribute() {
         return email.getAttribute("type");

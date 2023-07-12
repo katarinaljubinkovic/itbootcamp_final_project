@@ -12,6 +12,9 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/header/div/div[3]/a[4]")
     private WebElement signUpField;
 
+    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]")
+    private WebElement logoutButton;
+
     @FindBy(xpath = "//*[@id=\"app\"]/div[4]/div/div/div[1]")
     private WebElement verifyMessage;
 
@@ -45,8 +48,8 @@ public class HomePage extends BasePage{
     @FindBy(className = "btnProfile")
     private WebElement myProfile;
 
-    public HomePage(WebDriver driver, WebDriverWait driverWait) {
-        super(driver, driverWait);
+    public HomePage(WebDriver driver) {
+        super(driver);
     }
     public void loginOption() {
         loginField.click();
@@ -60,6 +63,9 @@ public class HomePage extends BasePage{
     public void adminCities() {
         admin.click();
         cities.click();
+    }
+    public WebElement getLogoutButton() {
+        return logoutButton;
     }
     public void chooseLanguage(Language language) {
         languageButton.click();

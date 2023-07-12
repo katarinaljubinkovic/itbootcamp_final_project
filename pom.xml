@@ -14,6 +14,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 <dependencies>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>4.7.2</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.testng/testng -->
     <dependency>
         <groupId>org.testng</groupId>
@@ -21,11 +26,11 @@
         <version>7.5</version>
         <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>4.7.2</version>
+        <artifactId>selenium-chrome-driver</artifactId>
+        <version>4.8.0</version>
     </dependency>
     <dependency>
         <groupId>com.github.javafaker</groupId>

@@ -1,32 +1,26 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.security.Key;
 import java.util.List;
 
 public class CitiesPage extends BasePage{
-
-    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]")
-    private WebElement logoutButton;
-
     @FindBy(className = "btnNewItem")
-    private WebElement newItem;
+    private WebElement newItemButton;
 
     @FindBy(id = "name")
-    private WebElement name;
+    private WebElement cityName;
 
     @FindBy(className = "btnSave")
     private WebElement saveButton;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
-    private WebElement saveMessage;
+    private WebElement alertMessage;
 
     @FindBy(id = "search")
     private WebElement searchField;
@@ -38,55 +32,39 @@ public class CitiesPage extends BasePage{
     private WebElement editButton;
 
     @FindBy(id = "name")
-    private WebElement editNameField;
-
-    @FindBy(className = "btnSave")
-    private WebElement save;
+    private WebElement editNameInput;
 
     @FindBy(id = "delete")
     private WebElement deleteButton;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
-    private WebElement message;
-
     @FindAll({@FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr")})
     private List<WebElement> cityList;
 
-    @FindBy(className = "v-dialog")
-    private WebElement deleteWindow;
-
     @FindBy (css = "#app > div.v-dialog__content.v-dialog__content--active > div > div > div.v-card__actions > button.v-btn.v-btn--text.theme--light.v-size--default.red--text.text--lighten3")
-    private WebElement messageDeleteButton;
+    private WebElement confirmDelete;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
-    private WebElement popUpWindow;
+    public CitiesPage(WebDriver driver) {
+        super(driver);
+    }
 
-    public CitiesPage(WebDriver driver, WebDriverWait driverWait) {
-        super(driver, driverWait);
-    }
-    public WebElement getLogoutButton() {
-        return logoutButton;
-    }
     public void createCity(String city) {
-        newItem.click();
-        this.name.sendKeys(city);
+        newItemButton.click();
+        cityName.clear();
+        cityName.sendKeys(city);
         saveButton.click();
     }
-    public String getSaveMessage(){
-        return saveMessage.getText();
+    public String getMessage(){
+        return alertMessage.getText();
     }
     public void search(String city) {
         searchField.clear();
         searchField.sendKeys(city);
         searchButton.click();
     }
-    public void edit(String city) {
+    public void edit() {
         editButton.click();
-        editNameField.sendKeys(  " - edited");
-        save.click();
-    }
-    public String getMessage() {
-        return message.getText();
+        editNameInput.sendKeys(  " - edited");
+        saveButton.click();
     }
     public boolean containsSearchString(String searchString) {
         for (WebElement city : cityList) {
@@ -97,19 +75,9 @@ public class CitiesPage extends BasePage{
         }
         return true;
     }
-    public WebElement getDeleteButton() {
-        return deleteButton;
-    }
-
-    public WebElement getMessageDeleteButton() {
-        return messageDeleteButton;
-    }
-
-    public WebElement getDeleteWindow() {
-        return deleteWindow;
-    }
-    public String getPopUpWindow() {
-        return popUpWindow.getText();
+    public void delete(String city) {
+        deleteButton.click();
+        confirmDelete.click();
     }
 
 }

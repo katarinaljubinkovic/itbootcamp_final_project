@@ -32,8 +32,8 @@ public class ProfilePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]")
     private WebElement alertMessage;
 
-    public ProfilePage(WebDriver driver, WebDriverWait driverWait) {
-        super(driver, driverWait);
+    public ProfilePage(WebDriver driver) {
+        super(driver);
     }
 
     public void extracted(WebElement element) {

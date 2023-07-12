@@ -17,8 +17,8 @@ public class ProfileTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        signUpPage = new SignUpPage(driver, driverWait);
-        profilePage = new ProfilePage(driver, driverWait);
+        signUpPage = new SignUpPage(driver);
+        profilePage = new ProfilePage(driver);
 
     }
     @BeforeMethod

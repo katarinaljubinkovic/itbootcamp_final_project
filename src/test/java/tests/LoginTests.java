@@ -16,7 +16,7 @@ public class LoginTests extends BaseTest{
     @BeforeClass
     public void beforeClass() {
         super.beforeClass();
-        loginPage = new LoginPage(driver, driverWait);
+        loginPage = new LoginPage(driver);
     }
 
     @BeforeMethod
@@ -51,9 +51,6 @@ public class LoginTests extends BaseTest{
     @Test
     public void validDatesLoginTest() {
         loginPage.login(EMAIL, PASSWORD);
-
-        driverWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[2]/div[1]/a"),
-                        "Buy me a coffee"));
         Assert.assertTrue(driver.getCurrentUrl().endsWith("/home"));
         loginPage.logout();
     }
